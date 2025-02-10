@@ -2,54 +2,58 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    console.log("🔥 API HIT: /api/generate (Gemini)");
+    console.log(" API HIT: /api/generate (Gemini)");
 
     // Read request body
     const { prompt, businessType, targetAudience } = await req.json();
-    console.log("📩 Received Input:", { prompt, businessType, targetAudience });
+    console.log(" Received Input:", { prompt, businessType, targetAudience });
 
-    // Validate input
     if (!prompt || !businessType || !targetAudience) {
-      console.log("❌ Missing input fields");
       return NextResponse.json({ error: "Missing input fields" }, { status: 400 });
     }
 
-    // Check if API key is available
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      console.log("❌ Gemini API Key Missing");
       return NextResponse.json({ error: "Gemini API key is missing" }, { status: 500 });
     }
 
-    // Construct prompt message
-    const fullPrompt = `Generate content for a ${businessType} targeting ${targetAudience}. Here is the user request: ${prompt}`;
+    // 👇 **Updated AI Prompt to Ensure Blog Post Structure**
+    const fullPrompt = `
+      You are a professional blog writer specializing in ${businessType}.
+      Your target audience is ${targetAudience}.
+      Write a **detailed, well-structured blog post** based on the following user request:
 
-    // Make request to Google's Gemini API
+      ---
+      "${prompt}"
+      ---
+
+      **Follow this blog structure:**
+      - Use a **catchy, SEO-optimized title**.
+      - Write an **engaging introduction** (hook, problem statement, and solution preview).
+      - Organize the content with **headings (## Section Name)**.
+      - Use **bullet points, numbered lists, and bold key points** where helpful.
+      - Ensure **natural flow and readability** (short paragraphs, transitions).
+      - Conclude with a **strong ending** and a **call to action (CTA)**.
+      - **Format the response in Markdown**.
+    `;
+
     console.log("🔗 Sending request to Gemini...");
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: fullPrompt }],
-          },
-        ],
+        contents: [{ parts: [{ text: fullPrompt }] }],
       }),
     });
 
-    console.log("✅ Response received from Gemini");
+    console.log(" Response received from Gemini");
     const data = await response.json();
 
-    // Check if Gemini returned a response
     if (!data.candidates || data.candidates.length === 0) {
-      console.log("❌ Gemini returned an empty response");
       return NextResponse.json({ error: "Gemini API response was empty" }, { status: 500 });
     }
 
-    console.log("📝 AI Response:", data.candidates[0].content);
+    console.log(" AI Response:", data.candidates[0].content);
     return NextResponse.json({ result: data.candidates[0].content });
   } catch (error) {
     console.error("❌ API ERROR:", error);
