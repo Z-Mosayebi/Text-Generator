@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { marked } from "marked";
+import ReactMarkdown from "react-markdown";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -46,49 +46,57 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-4">
-      <h1 className="text-3xl font-bold">Text Generator</h1>
+    <div className="flex min-h-screen p-6 bg-gray-100">
+      {/* Left Side - Inputs */}
+      <div className="w-1/3 bg-white p-6 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold mb-4">Text Generator</h1>
 
-      {/* Business Type Input */}
-      <Input
-        type="text"
-        placeholder="What type of business do you have?"
-        value={businessType}
-        onChange={(e) => setBusinessType(e.target.value)}
-        className="w-96"
-      />
+        {/* Business Type Input */}
+        <Input
+          type="text"
+          placeholder="What type of business do you have?"
+          value={businessType}
+          onChange={(e) => setBusinessType(e.target.value)}
+          className="w-full mb-4"
+        />
 
-      {/* Target Audience Input */}
-      <Input
-        type="text"
-        placeholder="Who is your target audience?"
-        value={targetAudience}
-        onChange={(e) => setTargetAudience(e.target.value)}
-        className="w-96"
-      />
+        {/* Target Audience Input */}
+        <Input
+          type="text"
+          placeholder="Who is your target audience?"
+          value={targetAudience}
+          onChange={(e) => setTargetAudience(e.target.value)}
+          className="w-full mb-4"
+        />
 
-      {/* Main Prompt Input */}
-      <Input
-        type="text"
-        placeholder="Enter your content idea..."
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        className="w-96"
-      />
+        {/* Main Prompt Input */}
+        <Input
+          type="text"
+          placeholder="Enter your content idea..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          className="w-full mb-4"
+        />
 
-      {/* Generate Button */}
-      <Button onClick={handleGenerate} className="w-32">
-        Generate
-      </Button>
+        {/* Generate Button */}
+        <Button onClick={handleGenerate} className="w-full bg-black text-white py-2">
+          Generate
+        </Button>
+      </div>
 
-      {/* Output Section */}
-      {generatedText && (
-        <Card className="w-96 p-4">
-          <CardContent>
-            <div dangerouslySetInnerHTML={{ __html: marked(generatedText) }} />
-          </CardContent>
-        </Card>
-      )}
+      {/* Right Side - Generated Text Output */}
+      <div className="w-2/3 ml-6 bg-white p-6 rounded-lg shadow-md overflow-y-auto">
+        <h2 className="text-xl font-semibold mb-4">Generated Content:</h2>
+        {generatedText ? (
+          <Card className="w-full p-4 bg-gray-50">
+            <CardContent>
+              <ReactMarkdown className="prose max-w-full">{generatedText}</ReactMarkdown>
+            </CardContent>
+          </Card>
+        ) : (
+          <p className="text-gray-500">Enter details and click generate to see results.</p>
+        )}
+      </div>
     </div>
   );
 }
