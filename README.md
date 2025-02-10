@@ -62,5 +62,5 @@ NEXT_PUBLIC_OPENAI_API_KEY=your-api-key-here
 This project is licensed under the MIT License.
 
 ## Contact
-For inquiries, reach out via [your-email@example.com](mailto:zhmosayebi@gmail.com).
+For inquiries, reach out via [zhmosayebi@gmail.com](mailto:zhmosayebi@gmail.com).
 
