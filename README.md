@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Text-Generation Interface with Next.js and ShadCN
 
-## Getting Started
+## Project Overview
+This project is a text-generation interface built using **Next.js** for the frontend and **ShadCN** for UI components. Users can set default preferences regarding their business type and target audience. Based on these inputs, the application generates text content for various use cases such as blog posts, ad copy, product descriptions, and social media captions.
 
-First, run the development server:
+## Features
+- **User Preferences**: Users can specify their business type and target audience.
+- **Prompt Input**: A text input field allows users to enter a prompt.
+- **AI-Powered Content Generation**: The application generates relevant text content using OpenAI's API.
+- **Markdown Formatting**: The generated content is displayed with proper formatting.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+- **Next.js**: Framework for the frontend
+- **ShadCN**: UI component library
+- **OpenAI API**: AI-powered text generation
+- **Tailwind CSS**: Styling framework
+
+## Installation
+### Prerequisites
+Ensure you have **Node.js** and **npm/yarn** installed on your system.
+
+### Clone the Repository
+```sh
+git clone https://github.com/your-username/text-generation-interface.git
+cd text-generation-interface
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Install Dependencies
+```sh
+npm install  # or yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running the Project
+```sh
+npm run dev  # or yarn dev
+```
+Open `http://localhost:3000` in your browser to access the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API Configuration
+1. Obtain an OpenAI API key from [OpenAI](https://openai.com/).
+2. Create a `.env.local` file in the project root and add the following:
+```env
+NEXT_PUBLIC_OPENAI_API_KEY=your-api-key-here
+```
 
-## Learn More
+## Project Structure
+```
+├── components/        # Reusable UI components
+├── pages/             # Next.js pages
+│   ├── index.tsx      # Homepage with input and result display
+├── styles/            # Global styles
+├── utils/             # Utility functions
+└── public/            # Static assets
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Future Improvements
+- Add more AI model options
+- Improve UI/UX
+- Implement authentication for user-specific preferences
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
+This project is licensed under the MIT License.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
+For inquiries, reach out via [your-email@example.com](mailto:zhmosayebi@gmail.com).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -89,8 +91,8 @@ export default function Home() {
         <Card className="w-full p-6 bg-white shadow-lg border rounded-lg">
           <h2 className="text-xl font-semibold mb-4">Generated Content:</h2>
           <CardContent className="overflow-y-auto max-h-[75vh] p-4 bg-gray-50 rounded-lg">
-            <div className="prose prose-lg max-w-full whitespace-normal break-words">
-              <ReactMarkdown>{generatedText}</ReactMarkdown>
+            <div className="prose prose-lg max-w-full whitespace-normal break-words ">
+            <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>{generatedText}</ReactMarkdown>
             </div>
           </CardContent>
         </Card>
