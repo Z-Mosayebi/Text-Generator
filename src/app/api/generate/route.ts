@@ -17,7 +17,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Gemini API key is missing" }, { status: 500 });
     }
 
-    // 👇 **Updated AI Prompt to Ensure Blog Post Structure**
+    //  **Updated AI Prompt to Ensure Blog Post Structure**
     const fullPrompt = `
       You are a professional blog writer specializing in ${businessType}.
       Your target audience is ${targetAudience}.
@@ -56,7 +56,11 @@ export async function POST(req: Request) {
     console.log(" AI Response:", data.candidates[0].content);
     return NextResponse.json({ result: data.candidates[0].content });
   } catch (error) {
-    console.error("❌ API ERROR:", error);
-    return NextResponse.json({ error: "Internal Server Error", details: error.message }, { status: 500 });
-  }
+    console.error(" API ERROR:", error);
+
+    // Ensure error is treated as an Error object
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
+}
 }
