@@ -46,9 +46,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen p-6 bg-gray-100">
-      {/* Left Side - Inputs */}
-      <div className="w-1/3 bg-white p-6 rounded-lg shadow-md">
+    <div className="flex flex-col md:flex-row min-h-screen p-4 md:p-8 bg-gray-100">
+      {/* Left Section (Inputs) */}
+      <div className="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-4">Text Generator</h1>
 
         {/* Business Type Input */}
@@ -84,21 +84,16 @@ export default function Home() {
         </Button>
       </div>
 
-      {/* Right Side - Generated Text Output */}
-      <div className="w-2/3 ml-6 bg-white p-6 rounded-lg shadow-md overflow-y-auto">
-        <h2 className="text-xl font-semibold mb-4">Generated Content:</h2>
-        {generatedText ? (
-          <Card className="w-full max-w-2xl p-6 bg-white shadow-lg border rounded-lg">
-          <CardContent>
-            <div className="prose prose-lg max-w-none">
+      {/* Right Section (Generated Content) */}
+      <div className="w-full md:w-2/3 mt-6 md:mt-0 md:ml-6">
+        <Card className="w-full p-6 bg-white shadow-lg border rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Generated Content:</h2>
+          <CardContent className="overflow-y-auto max-h-[75vh] p-4 bg-gray-50 rounded-lg">
+            <div className="prose prose-lg max-w-full whitespace-normal break-words">
               <ReactMarkdown>{generatedText}</ReactMarkdown>
             </div>
           </CardContent>
         </Card>
-        
-        ) : (
-          <p className="text-gray-500">Enter details and click generate to see results.</p>
-        )}
       </div>
     </div>
   );
