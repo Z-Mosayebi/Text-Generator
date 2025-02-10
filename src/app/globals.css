@@ -64,9 +64,13 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+    border-color: hsl(var(--border)); 
   }
 }
+  @layer base {
+    body {
+      background-color: hsl(var(--background, 0, 0%, 100%)); /* ✅ Fix missing `bg-background` */
+      color: hsl(var(--foreground, 0, 0%, 0%)); /* ✅ Ensures text is visible */
+    }
+  }
+

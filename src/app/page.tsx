@@ -88,11 +88,14 @@ export default function Home() {
       <div className="w-2/3 ml-6 bg-white p-6 rounded-lg shadow-md overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4">Generated Content:</h2>
         {generatedText ? (
-          <Card className="w-full p-4 bg-gray-50">
-            <CardContent>
-              <ReactMarkdown className="prose max-w-full">{generatedText}</ReactMarkdown>
-            </CardContent>
-          </Card>
+          <Card className="w-full max-w-2xl p-6 bg-white shadow-lg border rounded-lg">
+          <CardContent>
+            <div className="prose prose-lg max-w-none">
+              <ReactMarkdown>{generatedText}</ReactMarkdown>
+            </div>
+          </CardContent>
+        </Card>
+        
         ) : (
           <p className="text-gray-500">Enter details and click generate to see results.</p>
         )}
