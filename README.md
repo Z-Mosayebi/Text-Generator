@@ -55,7 +55,8 @@ NEXT_PUBLIC_OPENAI_API_KEY=your-api-key-here
 
 ## Screenshot
 
-![Screenshot](./public/home.png)
+![Screenshot](./public/image/home.png)
+
 
 
 ## Future Improvements
