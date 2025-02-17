@@ -53,6 +53,11 @@ NEXT_PUBLIC_OPENAI_API_KEY=your-api-key-here
 └── public/            # Static assets
 ```
 
+## Screenshot
+
+![Screenshot](./public/home.png)
+
+
 ## Future Improvements
 - Add more AI model options
 - Improve UI/UX

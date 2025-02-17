@@ -1,0 +1,11 @@
+[33mcommit 7b74c4aa5820f13c5af2b90babef036ac87aad4a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Parastoo <zhmosayebi@gmail.com>
+Date:   Mon Feb 17 18:34:55 2025 +0100
+
+    Fixed markdown rendering and hydration errors, updated globals.css-17.02.2025-6:34 PM
+
+[33mcommit 7d22a79c5fbd18faa4c4f6d30a1edb9e4bd16614[m
+Author: Parastoo <zhmosayebi@gmail.com>
+Date:   Mon Feb 10 22:55:39 2025 +0100
+
+    edit README
