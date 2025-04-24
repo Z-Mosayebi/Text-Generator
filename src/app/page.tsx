@@ -37,7 +37,17 @@ export default function Home() {
       const data = await response.json();
 
       if (data.result && data.result.parts && data.result.parts.length > 0) {
-        setGeneratedText(data.result.parts[0].text);
+        const rawText = data.result.parts[0].text || "";
+
+  // 🧽 Clean: remove surrounding ```markdown ... ``` blocks if present
+  const cleanedText = rawText
+    .replace(/^```markdown\s*/, "")  // Remove the starting ```markdown
+    .replace(/\s*```$/, "")          // Remove the ending ```
+    .trim();                         // Trim whitespace
+
+  console.log("💬 Cleaned Text:", cleanedText); // Optional for debugging
+
+  setGeneratedText(cleanedText);
       } else {
         setGeneratedText("⚠️ No response from AI.");
       }
@@ -90,10 +100,20 @@ export default function Home() {
       <div className="w-full md:w-2/3 mt-6 md:mt-0 md:ml-6">
         <Card className="w-full p-6 bg-white shadow-lg border rounded-lg">
           <h2 className="text-xl font-semibold mb-4">Generated Content:</h2>
-          <CardContent className="overflow-y-auto max-h-[75vh] p-4 bg-gray-50 rounded-lg">
+          <CardContent className="overflow-y-auto max-h-[75vh] p-4 text-black bg-white rounded-lg">
             <div className="prose prose-lg max-w-full whitespace-normal break-words ">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>{generatedText}</ReactMarkdown>
             </div>
+             {/* Copy Button */}
+  <Button
+    className="mt-2 bg-blue-600 text-white hover:bg-blue-700"
+    onClick={() => {
+      navigator.clipboard.writeText(generatedText);
+      alert("Copied to clipboard ✅");
+    }}
+  >
+     📄 Copy
+    </Button>
           </CardContent>
         </Card>
       </div>
